@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A small interactive HTML artifact in the Atelier demo vault.">
+    <title>Artifact Timeline</title>
+    <link rel="stylesheet" href="../assets/vault.css">
+    <style>
+      .timeline {
+        display: grid;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .timeline button {
+        width: 100%;
+        min-height: 58px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--ink);
+        background: #fff;
+        text-align: left;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .timeline button.active {
+        border-color: var(--teal);
+        box-shadow: inset 4px 0 0 var(--teal);
+      }
+
+      .detail {
+        min-height: 120px;
+        margin-top: 18px;
+        padding: 22px;
+        border-radius: 8px;
+        background: #1f2428;
+      }
+
+      .detail h2,
+      .detail p {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="topline">
+        <span class="brand">Timeline</span>
+        <nav class="nav">
+          <a href="../index.html">Index</a>
+          <a href="../docs/spec.html">Spec</a>
+          <a href="../components/card-lab.html">Card lab</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">Interactive artifact</p>
+        <h1>HTML files can carry behavior without becoming a whole app.</h1>
+        <p>
+          This page has local script behavior, which the vault preview serves without needing a separate framework.
+        </p>
+      </section>
+
+      <section class="timeline" aria-label="Artifact timeline">
+        <button type="button" data-title="Prompt" data-body="The builder asks an agent to make a real file, not a disposable response.">Prompt</button>
+        <button type="button" data-title="Artifact" data-body="The agent writes HTML, CSS, and JavaScript into the vault folder.">Artifact</button>
+        <button type="button" data-title="Index" data-body="The vault parses links, backlinks, metadata, and graph relationships.">Index</button>
+        <button type="button" data-title="Reuse" data-body="The next agent pass can reference the artifact as durable local context.">Reuse</button>
+      </section>
+
+      <section class="detail" aria-live="polite">
+        <h2>Prompt</h2>
+        <p>The builder asks an agent to make a real file, not a disposable response.</p>
+      </section>
+    </main>
+
+    <script>
+      const buttons = document.querySelectorAll('.timeline button')
+      const detail = document.querySelector('.detail')
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          buttons.forEach((item) => item.classList.remove('active'))
+          button.classList.add('active')
+          detail.innerHTML = `<h2>${button.dataset.title}</h2><p>${button.dataset.body}</p>`
+        })
+      })
+
+      buttons[0].classList.add('active')
+    </script>
+  </body>
+</html>

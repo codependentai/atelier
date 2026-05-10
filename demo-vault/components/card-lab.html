@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A reusable component artifact in the Atelier demo vault.">
+    <title>Component Card Lab</title>
+    <link rel="stylesheet" href="../assets/vault.css">
+    <style>
+      .swatch-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .swatch {
+        width: 132px;
+        height: 92px;
+        padding: 12px;
+        border-radius: 8px;
+        color: #fff;
+        font-weight: 800;
+      }
+
+      .teal {
+        background: #006d75;
+      }
+
+      .coral {
+        background: #d76142;
+      }
+
+      .gold {
+        color: #251f11;
+        background: #d9ba6a;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="topline">
+        <span class="brand">Card lab</span>
+        <nav class="nav">
+          <a href="../index.html">Index</a>
+          <a href="../landing/signal.html">Signal</a>
+          <a href="../docs/spec.html">Spec</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">Reusable surface</p>
+        <h1>Artifacts can be components, not only pages.</h1>
+        <p>
+          A builder vault should make small UI studies as easy to keep, link, and revisit as long-form docs.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="tile">
+          <h2>Artifact card</h2>
+          <p>Use this layout for agent output that needs title, purpose, and nearby links.</p>
+        </article>
+        <article class="tile">
+          <h2>Inspection card</h2>
+          <p>Pair a component with source, screenshots, notes, and the prompt that produced it.</p>
+        </article>
+        <article class="tile">
+          <h2>Demo card</h2>
+          <p>Link to <a href="../tools/timeline.html">interactive timeline</a> when the artifact needs behavior.</p>
+        </article>
+      </section>
+
+      <section class="swatch-row" aria-label="Palette">
+        <div class="swatch teal">Teal</div>
+        <div class="swatch coral">Coral</div>
+        <div class="swatch gold">Gold</div>
+      </section>
+    </main>
+  </body>
+</html>

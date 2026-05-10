@@ -1,0 +1,128 @@
+{
+  "name": "@codependentai/atelier",
+  "version": "0.1.1",
+  "type": "module",
+  "description": "A workshop for HTML and Markdown — local-first vault with a CLI for agents.",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Codependent AI",
+  "homepage": "https://atelier.codependentai.io",
+  "keywords": [
+    "atelier",
+    "html",
+    "markdown",
+    "vault",
+    "obsidian",
+    "wikilinks",
+    "cli",
+    "agent",
+    "local-first",
+    "workshop"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "dist-electron/electron/main.js",
+  "bin": {
+    "atelier": "dist-cli/cli/main.js"
+  },
+  "files": [
+    "dist-cli",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "pnpm build:electron && concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 dist-electron/electron/main.js && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .\"",
+    "build": "pnpm typecheck && pnpm build:electron && pnpm build:cli && vite build",
+    "build:cli": "tsc -p tsconfig.cli.json",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build:icon": "node scripts/build-icon.mjs",
+    "typecheck": "tsc -b --noEmit && tsc -p tsconfig.electron.json --noEmit && tsc -p tsconfig.cli.json --noEmit",
+    "atelier": "pnpm build:cli && node dist-cli/cli/main.js",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "start": "pnpm build && electron .",
+    "dist": "pnpm build && electron-builder",
+    "dist:win": "pnpm build && electron-builder --win"
+  },
+  "build": {
+    "appId": "io.codependentai.atelier",
+    "productName": "Atelier",
+    "copyright": "Copyright © 2026 Codependent AI",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "dist/**/*",
+      "package.json",
+      "!node_modules/**/{CHANGELOG.md,README.md,readme.md,changelog.md,test,tests,__tests__}",
+      "!**/*.{ts,tsx,map}"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "Atelier-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Atelier",
+      "uninstallDisplayName": "Atelier"
+    }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "electron-winstaller",
+      "sharp"
+    ]
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "chokidar": "^5.0.0",
+    "markdown-it": "^14.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@monaco-editor/react": "^4.7.0",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^42.0.0",
+    "electron-builder": "^26.8.1",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "lucide-react": "^1.14.0",
+    "png-to-ico": "^3.0.1",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "sharp": "^0.34.5",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5",
+    "wait-on": "^9.0.5"
+  }
+}
